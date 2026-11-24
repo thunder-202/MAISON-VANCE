@@ -42,6 +42,17 @@ export default function App() {
 
   // Intersection Observer for Subtle Editorial Scroll Reveals
   useEffect(() => {
+    const revealAllFallback = () => {
+      document.querySelectorAll('.reveal-up').forEach((el) => {
+        el.classList.add('is-visible');
+      });
+    };
+
+    if (typeof IntersectionObserver === 'undefined') {
+      revealAllFallback();
+      return;
+    }
+
     const observerOptions: IntersectionObserverInit = {
       threshold: 0.12,
       rootMargin: '0px 0px -40px 0px',
@@ -64,18 +75,20 @@ export default function App() {
 
     observeAll();
 
-    // Observe DOM mutations so filtered project cards also get revealed
-    const mutationObserver = new MutationObserver(() => {
-      observeAll();
-    });
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+    let mutationObserver: MutationObserver | null = null;
+    if (typeof MutationObserver !== 'undefined') {
+      mutationObserver = new MutationObserver(() => {
+        observeAll();
+      });
+      mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
 
     return () => {
       revealObserver.disconnect();
-      mutationObserver.disconnect();
+      mutationObserver?.disconnect();
     };
   }, []);
 

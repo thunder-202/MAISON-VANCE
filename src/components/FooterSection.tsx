@@ -12,13 +12,18 @@ interface StudioTimes {
 
 function getFormattedStudioTimes(): StudioTimes {
   const now = new Date();
-  const fmt = (tz: string) =>
-    new Intl.DateTimeFormat('en-GB', {
-      timeZone: tz,
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    }).format(now);
+  const fmt = (tz: string) => {
+    try {
+      return new Intl.DateTimeFormat('en-GB', {
+        timeZone: tz,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).format(now);
+    } catch {
+      return '--:--';
+    }
+  };
 
   return {
     zurich: fmt('Europe/Zurich'),
