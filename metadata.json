@@ -1,0 +1,6 @@
+{
+  "name": "MAISON VANCE — Spatial Identity & Digital Flagship Atelier",
+  "description": "Architectural & Digital Flagship Atelier crafting digital flagships and spatial identities of quiet permanence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

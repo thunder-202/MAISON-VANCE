@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON VANCE — Spatial Identity & Digital Flagship Atelier</title>
+    
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Crisp UI Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Configuration for Maison Vance Design Tokens -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alabaster: '#F6F4F0',
+                        alabasterDark: '#EDEAE3',
+                        charcoal: '#181816',
+                        charcoalMuted: '#575550',
+                        bronze: '#9E825E',
+                        bronzeLight: '#B89F7D',
+                        stoneBorder: '#E2DDD5',
+                        espresso: '#141312',
+                        espressoElevated: '#1E1D1B',
+                        espressoBorder: '#2C2A27',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    transitionTimingFunction: {
+                        'editorial': 'cubic-bezier(0.22, 1, 0.36, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Bespoke Editorial Refinement & Micro-interactions */
+        body {
+            background-color: #F6F4F0;
+            color: #181816;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Subtle Grain Texture Overlay for Tactile Paper Feel */
+        .paper-grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Editorial Image Hover & Reveal */
+        .editorial-img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+        .editorial-img-wrap img {
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
+        }
+        .group:hover .editorial-img-wrap img,
+        .editorial-img-wrap:hover img {
+            transform: scale(1.045);
+        }
+
+        /* Subtle Underline Link Animation */
+        .editorial-link {
+            position: relative;
+            display: inline-block;
+        }
+        .editorial-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .editorial-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar for Drawers */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F6F4F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C9C3B8;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9E825E;
+        }
+
+        /* Custom Selection Color */
+        ::selection {
+            background-color: #9E825E;
+            color: #F6F4F0;
+        }
+    </style>
+</head>
+<body class="bg-alabaster text-charcoal antialiased selection:bg-bronze selection:text-alabaster">
+
+    <!-- Subtle Archival Paper Grain -->
+    <div class="paper-grain" aria-hidden="true"></div>
+
+    <!-- =====================================================================
+         1. MINIMALIST FLOATING NAVIGATION
+         ===================================================================== -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 border-b border-transparent">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12 h-20 md:h-24 flex items-center justify-between">
+            
+            <!-- Brand Wordmark -->
+            <a href="#" class="group flex items-center gap-3 focus:outline-none">
+                <span class="w-2 h-2 rounded-full bg-bronze transition-transform duration-500 group-hover:scale-150"></span>
+                <span class="font-serif text-xl md:text-2xl tracking-[0.18em] uppercase font-normal text-charcoal">
+                    Maison Vance
+                </span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-10 text-xs uppercase tracking-[0.16em] text-charcoalMuted font-medium">
+                <a href="#selected-works" class="editorial-link hover:text-charcoal transition-colors">Selected Works</a>
+                <a href="#philosophy" class="editorial-link hover:text-charcoal transition-colors">Philosophy</a>
+                <a href="#atelier-estimator" class="editorial-link hover:text-charcoal transition-colors">Atelier Scope</a>
+                <a href="#contact-footer" class="editorial-link hover:text-charcoal transition-colors">Studios</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-4">
+                <button onclick="openBookingDrawer()" class="px-5 py-2.5 md:px-6 md:py-3 rounded-full border border-charcoal/25 hover:border-charcoal bg-alabaster/80 backdrop-blur-md text-xs uppercase tracking-[0.15em] font-medium text-charcoal hover:bg-charcoal hover:text-alabaster transition-all duration-500 flex items-center gap-2.5 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-bronze animate-pulse"></span>
+                    <span>Private Consultation</span>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Menu" class="lg:hidden p-2.5 rounded-full border border-stoneBorder text-charcoal hover:bg-alabasterDark transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M4 8h16M4 16h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Slide-down Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-alabaster border-b border-stoneBorder px-6 py-8 space-y-6">
+            <div class="flex flex-col space-y-4 text-sm uppercase tracking-[0.16em] text-charcoal">
+                <a href="#selected-works" onclick="toggleMobileMenu()" class="py-1 border-b border-stoneBorder/60">Selected Works</a>
+                <a href="#philosophy" onclick="toggleMobileMenu()" class="py-1 border-b border-stoneBorder/60">Philosophy</a>
+                <a href="#atelier-estimator" onclick="toggleMobileMenu()" class="py-1 border-b border-stoneBorder/60">Atelier Scope & Estimate</a>
+                <a href="#contact-footer" onclick="toggleMobileMenu()" class="py-1">Global Studios</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =====================================================================
+             2. EDITORIAL HERO SECTION
+             ===================================================================== -->
+        <section class="pt-32 pb-20 md:pt-44 md:pb-32 px-6 md:px-12 max-w-[1440px] mx-auto">
+            
+            <!-- Top Metadata Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-8 mb-10 md:mb-14 border-b border-stoneBorder text-[11px] uppercase tracking-[0.2em] text-charcoalMuted">
+                <div class="flex items-center gap-3">
+                    <span>Architectural & Digital Flagship Atelier</span>
+                    <span class="hidden sm:inline text-bronze">•</span>
+                    <span class="hidden sm:inline">Est. MMXIX</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <span>Zürich</span>
+                    <span>London</span>
+                    <span>Kyoto</span>
+                </div>
+            </div>
+
+            <!-- Asymmetric Editorial Headline Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end mb-14 md:mb-20">
+                <div class="lg:col-span-8">
+                    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[5.35rem] font-light leading-[1.03] tracking-[-0.02em] text-charcoal">
+                        Crafting Digital Flagships &amp; <span class="italic font-normal text-bronze">Spatial Identities</span> of Quiet Permanence.
+                    </h1>
+                </div>
+                <div class="lg:col-span-4 lg:pb-3 flex flex-col justify-between space-y-8">
+                    <p class="text-sm md:text-base text-charcoalMuted font-light leading-relaxed">
+                        We partner with visionary architectural practices, private sanctuaries, and heritage maisons to translate tactile physical spaces into high-converting digital experiences.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-6">
+                        <a href="#selected-works" class="group inline-flex items-center gap-3 text-xs uppercase tracking-[0.18em] font-medium text-charcoal pb-1.5 border-b border-charcoal hover:border-bronze hover:text-bronze transition-colors">
+                            <span>Explore Selected Works</span>
+                            <svg class="w-4 h-4 transform transition-transform duration-500 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#atelier-estimator" class="text-xs uppercase tracking-[0.18em] text-charcoalMuted hover:text-charcoal transition-colors">
+                            Configure Scope →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editorial Hero Showcase Frame with Subtle Hover Tilt & Floating Caption Card -->
+            <div id="heroShowcase" class="relative rounded-2xl overflow-hidden border border-stoneBorder bg-alabasterDark shadow-sm group cursor-pointer" onclick="openCaseStudy('villa-solis')">
+                <div class="editorial-img-wrap aspect-[16/10] md:aspect-[21/10] w-full">
+                    <img 
+                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=85" 
+                        onerror="this.src='https://placehold.co/1800x900/EDEAE3/181816?text=VILLA+SOLIS+—+MALLORCA'"
+                        alt="Minimalist travertine coastal villa architecture in Mallorca" 
+                        class="w-full h-full object-cover object-center"
+                    >
+                    <!-- Subtle editorial vignette -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-espresso/45 via-transparent to-transparent opacity-80"></div>
+                </div>
+
+                <!-- Floating Featured Commission Card -->
+                <div class="md:absolute md:bottom-8 md:left-8 md:right-8 flex flex-col md:flex-row md:items-end justify-between gap-4 p-6 md:p-0 bg-alabaster md:bg-transparent border-t md:border-t-0 border-stoneBorder">
+                    <div class="bg-alabaster/95 backdrop-blur-md border border-stoneBorder rounded-xl p-5 md:p-6 max-w-md shadow-lg transition-transform duration-500 group-hover:-translate-y-1">
+                        <div class="flex items-center justify-between gap-4 mb-2">
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-bronze font-semibold">Featured Commission • 01</span>
+                            <span class="text-[10px] uppercase tracking-[0.16em] text-charcoalMuted">Hospitality &amp; Spatial</span>
+                        </div>
+                        <h2 class="font-serif text-2xl md:text-3xl text-charcoal mb-1.5">Villa Solis, Mallorca</h2>
+                        <p class="text-xs text-charcoalMuted font-light leading-relaxed mb-4">
+                            Complete digital flagship, private residency booking engine, and architectural monograph for a limestone cliffside sanctuary.
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-stoneBorder text-[11px] uppercase tracking-[0.16em] text-charcoal font-medium">
+                            <span>+185% Direct Bookings</span>
+                            <span class="text-bronze group-hover:translate-x-1 transition-transform">Inspect Case Study →</span>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Cue Pill -->
+                    <div class="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-full bg-espresso/75 backdrop-blur-md border border-white/15 text-alabaster text-[11px] uppercase tracking-[0.18em]">
+                        <span>Index 2024 — 2026</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-bronzeLight"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             3. SELECTED WORKS (INTERACTIVE FILTERABLE CASE STUDY SHOWCASE)
+             ===================================================================== -->
+        <section id="selected-works" class="py-24 md:py-36 px-6 md:px-12 border-t border-stoneBorder max-w-[1440px] mx-auto">
+            
+            <!-- Section Header & Filter Controls -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 md:mb-20 reveal-up">
+                <div>
+                    <span class="block text-[11px] uppercase tracking-[0.22em] text-bronze font-medium mb-4">Curated Monograph</span>
+                    <h2 class="font-serif text-4xl md:text-6xl font-light tracking-[-0.015em] text-charcoal">
+                        Selected Commissions
+                    </h2>
+                </div>
+
+                <!-- Interactive Filter Pills -->
+                <div id="filterContainer" class="flex flex-wrap items-center gap-2.5" role="tablist" aria-label="Filter commissions">
+                    <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.15em] transition-all duration-300 bg-charcoal text-alabaster border border-charcoal">
+                        All Commissions (04)
+                    </button>
+                    <button data-filter="hospitality" class="filter-btn px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.15em] transition-all duration-300 bg-transparent text-charcoalMuted border border-stoneBorder hover:border-charcoal hover:text-charcoal">
+                        Hospitality
+                    </button>
+                    <button data-filter="architecture" class="filter-btn px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.15em] transition-all duration-300 bg-transparent text-charcoalMuted border border-stoneBorder hover:border-charcoal hover:text-charcoal">
+                        Architecture
+                    </button>
+                    <button data-filter="private-brands" class="filter-btn px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.15em] transition-all duration-300 bg-transparent text-charcoalMuted border border-stoneBorder hover:border-charcoal hover:text-charcoal">
+                        Private Brands
+                    </button>
+                </div>
+            </div>
+
+            <!-- Asymmetric Editorial Project Grid -->
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-x-10 md:gap-y-24">
+                
+                <!-- Project 1: Villa Solis (7 Cols) -->
+                <article data-category="hospitality" onclick="openCaseStudy('villa-solis')" class="project-card md:col-span-7 group cursor-pointer reveal-up">
+                    <div class="editorial-img-wrap rounded-2xl border border-stoneBorder bg-alabasterDark aspect-[16/11] mb-6">
+                        <img 
+                            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=85" 
+                            onerror="this.src='https://placehold.co/1200x825/EDEAE3/181816?text=VILLA+SOLIS'"
+                            alt="Villa Solis Mallorca limestone pool and courtyard" 
+                            class="w-full h-full object-cover"
+                        >
+                        <div class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-alabaster/90 backdrop-blur-md border border-stoneBorder text-[10px] uppercase tracking-[0.18em] text-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            View Case Study
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4 border-b border-stoneBorder pb-5">
+                        <div>
+                            <div class="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-bronze mb-2">
+                                <span>01</span>
+                                <span>/</span>
+                                <span>Hospitality &amp; Private Residency</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-charcoal group-hover:text-bronze transition-colors">Villa Solis — Tramuntana</h3>
+                        </div>
+                        <span class="text-xs uppercase tracking-[0.15em] text-charcoalMuted pt-2">2026</span>
+                    </div>
+                    <div class="pt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-charcoalMuted">
+                        <span>Brand Architecture • Digital Flagship • Direct Booking Engine</span>
+                        <span class="font-medium text-charcoal">+185% Direct Inquiries</span>
+                    </div>
+                </article>
+
+                <!-- Project 2: Atelier Kengo (5 Cols - Offset Downward on Desktop for Editorial Rhythm) -->
+                <article data-category="architecture" onclick="openCaseStudy('atelier-kengo')" class="project-card md:col-span-5 md:mt-20 group cursor-pointer reveal-up">
+                    <div class="editorial-img-wrap rounded-2xl border border-stoneBorder bg-alabasterDark aspect-[4/5] mb-6">
+                        <img 
+                            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85" 
+                            onerror="this.src='https://placehold.co/1000x1250/EDEAE3/181816?text=ATELIER+SOREN'"
+                            alt="Minimalist concrete and warm oak architectural interior" 
+                            class="w-full h-full object-cover"
+                        >
+                        <div class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-alabaster/90 backdrop-blur-md border border-stoneBorder text-[10px] uppercase tracking-[0.18em] text-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            View Case Study
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4 border-b border-stoneBorder pb-5">
+                        <div>
+                            <div class="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-bronze mb-2">
+                                <span>02</span>
+                                <span>/</span>
+                                <span>Architecture Practice</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-charcoal group-hover:text-bronze transition-colors">Søren Lindqvist Architects</h3>
+                        </div>
+                        <span class="text-xs uppercase tracking-[0.15em] text-charcoalMuted pt-2">2025</span>
+                    </div>
+                    <div class="pt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-charcoalMuted">
+                        <span>Interactive Archive • Monograph Typography</span>
+                        <span class="font-medium text-charcoal">99/100 Lighthouse</span>
+                    </div>
+                </article>
+
+                <!-- Project 3: Maison Verre (5 Cols) -->
+                <article data-category="private-brands" onclick="openCaseStudy('maison-verre')" class="project-card md:col-span-5 group cursor-pointer reveal-up">
+                    <div class="editorial-img-wrap rounded-2xl border border-stoneBorder bg-alabasterDark aspect-[4/5] mb-6">
+                        <img 
+                            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=85" 
+                            onerror="this.src='https://placehold.co/1000x1250/EDEAE3/181816?text=OBJEKT+VALE'"
+                            alt="Sculptural stone and bespoke collectible furniture piece" 
+                            class="w-full h-full object-cover"
+                        >
+                        <div class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-alabaster/90 backdrop-blur-md border border-stoneBorder text-[10px] uppercase tracking-[0.18em] text-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            View Case Study
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4 border-b border-stoneBorder pb-5">
+                        <div>
+                            <div class="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-bronze mb-2">
+                                <span>03</span>
+                                <span>/</span>
+                                <span>Private Brand &amp; Collectible Design</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-charcoal group-hover:text-bronze transition-colors">Objekt Vale — Geneva</h3>
+                        </div>
+                        <span class="text-xs uppercase tracking-[0.15em] text-charcoalMuted pt-2">2025</span>
+                    </div>
+                    <div class="pt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-charcoalMuted">
+                        <span>Private Collector Portal • Bespoke 3D Viewing</span>
+                        <span class="font-medium text-charcoal">3.4x Private Commission Value</span>
+                    </div>
+                </article>
+
+                <!-- Project 4: Aman Kyoto Sanctuary Concept (7 Cols - Offset) -->
+                <article data-category="hospitality" onclick="openCaseStudy('kurokawa-onsen')" class="project-card md:col-span-7 md:mt-20 group cursor-pointer reveal-up">
+                    <div class="editorial-img-wrap rounded-2xl border border-stoneBorder bg-alabasterDark aspect-[16/11] mb-6">
+                        <img 
+                            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=85" 
+                            onerror="this.src='https://placehold.co/1200x825/EDEAE3/181816?text=KUROKAWA+SANCTUARY'"
+                            alt="Serene timber and stone forest sanctuary architecture" 
+                            class="w-full h-full object-cover"
+                        >
+                        <div class="absolute top-4 right-4 px-3.5 py-1.5 rounded-full bg-alabaster/90 backdrop-blur-md border border-stoneBorder text-[10px] uppercase tracking-[0.18em] text-charcoal opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            View Case Study
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4 border-b border-stoneBorder pb-5">
+                        <div>
+                            <div class="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-bronze mb-2">
+                                <span>04</span>
+                                <span>/</span>
+                                <span>Hospitality &amp; Wellness</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-charcoal group-hover:text-bronze transition-colors">Kurokawa Forest Sanctuary</h3>
+                        </div>
+                        <span class="text-xs uppercase tracking-[0.15em] text-charcoalMuted pt-2">2024</span>
+                    </div>
+                    <div class="pt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-charcoalMuted">
+                        <span>Multilingual Digital Flagship • Concierge Suite</span>
+                        <span class="font-medium text-charcoal">94% Seasonal Occupancy</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             4. STUDIO PHILOSOPHY & CRAFTSMANSHIP (RICH ESPRESSO DARK MODE SECTION)
+             ===================================================================== -->
+        <section id="philosophy" class="bg-espresso text-alabaster py-28 md:py-40 px-6 md:px-12 border-y border-espressoBorder">
+            <div class="max-w-[1440px] mx-auto">
+                
+                <!-- Top Section Label -->
+                <div class="flex items-center justify-between pb-8 mb-16 border-b border-espressoBorder text-[11px] uppercase tracking-[0.22em] text-bronzeLight">
+                    <span>Atelier Ethos &amp; Discipline</span>
+                    <span>Principles of Quiet Luxury</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-start">
+                    
+                    <!-- Left Column: Editorial Pull Quote -->
+                    <div class="lg:col-span-5 lg:sticky lg:top-32 space-y-8 reveal-up">
+                        <blockquote class="font-serif text-3xl sm:text-4xl md:text-5xl font-light leading-[1.15] text-alabaster">
+                            “True luxury never raises its voice. It is felt in the <span class="italic text-bronzeLight">weight of silence</span>, the precision of proportion, and the effortless grace of every interaction.”
+                        </blockquote>
+                        <div class="pt-4 flex items-center gap-4">
+                            <div class="w-10 h-[1px] bg-bronzeLight"></div>
+                            <span class="text-xs uppercase tracking-[0.18em] text-alabaster/70">Henri Vance, Founding Creative Director</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Three Numbered Principles -->
+                    <div class="lg:col-span-7 space-y-10">
+                        
+                        <!-- Principle 01 -->
+                        <div class="group p-8 md:p-10 rounded-2xl bg-espressoElevated/70 border border-espressoBorder hover:border-bronze/50 transition-all duration-500 reveal-up">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="font-serif italic text-2xl text-bronzeLight">01.</span>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-alabaster/50">Visual Restraint</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-alabaster mb-4 group-hover:text-bronzeLight transition-colors">
+                                Restraint Over Noise
+                            </h3>
+                            <p class="text-sm md:text-base text-alabaster/70 font-light leading-relaxed">
+                                We reject fleeting digital gimmicks and templated clutter. Every grid proportion, typographic hierarchy, and negative space is calibrated with architectural rigor—allowing your work and heritage to command undivided reverence.
+                            </p>
+                        </div>
+
+                        <!-- Principle 02 -->
+                        <div class="group p-8 md:p-10 rounded-2xl bg-espressoElevated/70 border border-espressoBorder hover:border-bronze/50 transition-all duration-500 reveal-up">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="font-serif italic text-2xl text-bronzeLight">02.</span>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-alabaster/50">Bespoke Engineering</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-alabaster mb-4 group-hover:text-bronzeLight transition-colors">
+                                Sub-Second Performance
+                            </h3>
+                            <p class="text-sm md:text-base text-alabaster/70 font-light leading-relaxed">
+                                Aesthetic beauty collapses if hindered by latency. Our digital flagships are hand-engineered from the ground up with fluid 60fps motion, zero bloat, and near-instantaneous global delivery across every device.
+                            </p>
+                        </div>
+
+                        <!-- Principle 03 -->
+                        <div class="group p-8 md:p-10 rounded-2xl bg-espressoElevated/70 border border-espressoBorder hover:border-bronze/50 transition-all duration-500 reveal-up">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="font-serif italic text-2xl text-bronzeLight">03.</span>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-alabaster/50">Commercial Poise</span>
+                            </div>
+                            <h3 class="font-serif text-3xl md:text-4xl text-alabaster mb-4 group-hover:text-bronzeLight transition-colors">
+                                Conversion Through Desire
+                            </h3>
+                            <p class="text-sm md:text-base text-alabaster/70 font-light leading-relaxed">
+                                High-net-worth clientele do not respond to aggressive sales funnels. We choreograph intuitive, editorial pathways that cultivate deep trust and convert passive admiration into private inquiries and direct bookings.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             5. INTERACTIVE ATELIER EXPERIENCE / SCOPE & INVESTMENT CONFIGURATOR
+             ===================================================================== -->
+        <section id="atelier-estimator" class="py-28 md:py-36 px-6 md:px-12 max-w-[1440px] mx-auto">
+            
+            <div class="max-w-3xl mb-16 reveal-up">
+                <span class="block text-[11px] uppercase tracking-[0.22em] text-bronze font-medium mb-4">Bespoke Commission Configurator</span>
+                <h2 class="font-serif text-4xl md:text-6xl font-light tracking-[-0.015em] text-charcoal mb-6">
+                    Tailor Your Digital Flagship
+                </h2>
+                <p class="text-sm md:text-base text-charcoalMuted font-light leading-relaxed">
+                    Every engagement at Maison Vance is scoped individually. Select the architectural pillars and delivery cadence below to preview a tailored investment dossier and production roadmap.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                
+                <!-- Left: Interactive Pillars & Cadence Selector (7 Cols) -->
+                <div class="lg:col-span-7 space-y-10 reveal-up">
+                    
+                    <!-- Step 1: Select Commission Pillars -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs uppercase tracking-[0.18em] font-medium text-charcoal">I. Architectural Pillars</span>
+                            <span class="text-xs text-charcoalMuted">Select one or more disciplines</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="pillarOptions">
+                            
+                            <!-- Pillar 1 -->
+                            <button type="button" data-pillar="brand" data-price="6500" data-weeks="3" onclick="togglePillar(this)" class="pillar-card active text-left p-6 rounded-2xl border border-charcoal bg-alabasterDark/70 transition-all duration-300 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-[10px] uppercase tracking-[0.2em] text-bronze font-semibold">Foundation</span>
+                                        <span class="pillar-check w-5 h-5 rounded-full bg-charcoal text-alabaster flex items-center justify-center text-xs">✓</span>
+                                    </div>
+                                    <h4 class="font-serif text-2xl text-charcoal mb-2">Brand Architecture</h4>
+                                    <p class="text-xs text-charcoalMuted font-light leading-relaxed mb-4">
+                                        Visual identity system, bespoke typography pairing, editorial art direction, and monograph guidelines.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-stoneBorder flex items-center justify-between text-xs">
+                                    <span class="text-charcoalMuted">+3 Weeks</span>
+                                    <span class="font-medium text-charcoal">$6,500</span>
+                                </div>
+                            </button>
+
+                            <!-- Pillar 2 -->
+                            <button type="button" data-pillar="flagship" data-price="10000" data-weeks="5" onclick="togglePillar(this)" class="pillar-card active text-left p-6 rounded-2xl border border-charcoal bg-alabasterDark/70 transition-all duration-300 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-[10px] uppercase tracking-[0.2em] text-bronze font-semibold">Core Build</span>
+                                        <span class="pillar-check w-5 h-5 rounded-full bg-charcoal text-alabaster flex items-center justify-center text-xs">✓</span>
+                                    </div>
+                                    <h4 class="font-serif text-2xl text-charcoal mb-2">Bespoke Web Flagship</h4>
+                                    <p class="text-xs text-charcoalMuted font-light leading-relaxed mb-4">
+                                        Handcrafted responsive frontend, custom motion choreography, CMS architecture, and sub-second optimization.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-stoneBorder flex items-center justify-between text-xs">
+                                    <span class="text-charcoalMuted">+5 Weeks</span>
+                                    <span class="font-medium text-charcoal">$10,000</span>
+                                </div>
+                            </button>
+
+                            <!-- Pillar 3 -->
+                            <button type="button" data-pillar="concierge" data-price="4500" data-weeks="2" onclick="togglePillar(this)" class="pillar-card text-left p-6 rounded-2xl border border-stoneBorder bg-alabaster hover:border-charcoal/50 transition-all duration-300 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-[10px] uppercase tracking-[0.2em] text-charcoalMuted font-semibold">Commerce &amp; Flow</span>
+                                        <span class="pillar-check w-5 h-5 rounded-full border border-stoneBorder text-transparent flex items-center justify-center text-xs">✓</span>
+                                    </div>
+                                    <h4 class="font-serif text-2xl text-charcoal mb-2">Booking &amp; Concierge</h4>
+                                    <p class="text-xs text-charcoalMuted font-light leading-relaxed mb-4">
+                                        Private reservation suite, multi-currency payment integration, or bespoke client inquiry portal.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-stoneBorder flex items-center justify-between text-xs">
+                                    <span class="text-charcoalMuted">+2 Weeks</span>
+                                    <span class="font-medium text-charcoal">$4,500</span>
+                                </div>
+                            </button>
+
+                            <!-- Pillar 4 -->
+                            <button type="button" data-pillar="editorial" data-price="3500" data-weeks="2" onclick="togglePillar(this)" class="pillar-card text-left p-6 rounded-2xl border border-stoneBorder bg-alabaster hover:border-charcoal/50 transition-all duration-300 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-[10px] uppercase tracking-[0.2em] text-charcoalMuted font-semibold">Visibility</span>
+                                        <span class="pillar-check w-5 h-5 rounded-full border border-stoneBorder text-transparent flex items-center justify-center text-xs">✓</span>
+                                    </div>
+                                    <h4 class="font-serif text-2xl text-charcoal mb-2">Editorial Copy &amp; SEO</h4>
+                                    <p class="text-xs text-charcoalMuted font-light leading-relaxed mb-4">
+                                        Brand narrative scripting, architectural project monographs, and technical search authority setup.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-stoneBorder flex items-center justify-between text-xs">
+                                    <span class="text-charcoalMuted">+2 Weeks</span>
+                                    <span class="font-medium text-charcoal">$3,500</span>
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Delivery Cadence -->
+                    <div class="pt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs uppercase tracking-[0.18em] font-medium text-charcoal">II. Production Cadence</span>
+                            <span class="text-xs text-charcoalMuted">Select timeline preference</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button type="button" data-multiplier="1" data-label="Standard Atelier Cadence" onclick="selectCadence(this)" class="cadence-btn active p-4 rounded-xl border border-charcoal bg-charcoal text-alabaster text-left transition-all">
+                                <div class="text-xs uppercase tracking-[0.15em] font-medium mb-1">Standard</div>
+                                <div class="text-[11px] opacity-75">Measured &amp; unhurried</div>
+                            </button>
+                            <button type="button" data-multiplier="1.2" data-label="Accelerated Priority Track" onclick="selectCadence(this)" class="cadence-btn p-4 rounded-xl border border-stoneBorder bg-alabaster text-charcoal hover:border-charcoal text-left transition-all">
+                                <div class="text-xs uppercase tracking-[0.15em] font-medium mb-1">Accelerated (+20%)</div>
+                                <div class="text-[11px] text-charcoalMuted">Dedicated sprint team</div>
+                            </button>
+                            <button type="button" data-multiplier="0.9" data-label="Seasonal Retainer Partnership" onclick="selectCadence(this)" class="cadence-btn p-4 rounded-xl border border-stoneBorder bg-alabaster text-charcoal hover:border-charcoal text-left transition-all">
+                                <div class="text-xs uppercase tracking-[0.15em] font-medium mb-1">Seasonal (-10%)</div>
+                                <div class="text-[11px] text-charcoalMuted">Flexible Q3/Q4 window</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Live Investment Dossier Summary Card (5 Cols) -->
+                <div class="lg:col-span-5 lg:sticky lg:top-28 reveal-up">
+                    <div class="rounded-2xl border border-stoneBorder bg-alabasterDark/60 p-8 md:p-10 shadow-sm">
+                        <div class="flex items-center justify-between pb-6 mb-6 border-b border-stoneBorder">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-bronze font-semibold block mb-1">Commission Dossier</span>
+                                <h3 class="font-serif text-2xl md:text-3xl text-charcoal">Estimated Investment</h3>
+                            </div>
+                            <span class="px-3 py-1 rounded-full border border-stoneBorder bg-alabaster text-[10px] uppercase tracking-[0.16em] text-charcoalMuted">
+                                USD
+                            </span>
+                        </div>
+
+                        <!-- Live Price & Timeline Display -->
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-3 mb-2">
+                                <span id="estimatedTotal" class="font-serif text-5xl md:text-6xl font-light text-charcoal tracking-tight">$16,500</span>
+                                <span class="text-xs uppercase tracking-[0.16em] text-charcoalMuted">Est. Total</span>
+                            </div>
+                            <p id="estimatedTimeline" class="text-xs text-bronze uppercase tracking-[0.16em] font-medium">
+                                Estimated Delivery: 8 Weeks • Standard Atelier Cadence
+                            </p>
+                        </div>
+
+                        <!-- Dynamic Deliverable Roadmap List -->
+                        <div class="space-y-3 mb-8">
+                            <span class="block text-[10px] uppercase tracking-[0.2em] text-charcoalMuted">Included Deliverables</span>
+                            <ul id="selectedDeliverablesList" class="space-y-2.5 text-xs text-charcoal border-t border-stoneBorder pt-3">
+                                <li class="flex items-center justify-between">
+                                    <span>• Brand Architecture &amp; Typography</span>
+                                    <span class="text-charcoalMuted">Included</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>• Bespoke Web Flagship Build</span>
+                                    <span class="text-charcoalMuted">Included</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA Button transferring scope directly into the Private Consultation Drawer -->
+                        <button onclick="transferScopeToBooking()" class="w-full py-4 px-6 rounded-full bg-charcoal text-alabaster hover:bg-bronze transition-colors duration-500 text-xs uppercase tracking-[0.18em] font-medium flex items-center justify-center gap-3 shadow-sm">
+                            <span>Reserve Commission Window</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                        <p class="text-[11px] text-charcoalMuted text-center mt-4 font-light">
+                            All engagements commence with a private architectural discovery briefing.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             6. EDITORIAL FOOTER & GLOBAL STUDIO CLOCKS
+             ===================================================================== -->
+        <footer id="contact-footer" class="bg-espresso text-alabaster pt-24 pb-12 px-6 md:px-12 border-t border-espressoBorder">
+            <div class="max-w-[1440px] mx-auto">
+                
+                <!-- Top CTA & Studio Clocks Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-20 border-b border-espressoBorder">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-[11px] uppercase tracking-[0.22em] text-bronzeLight">New Commissions • Q3 / Q4</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1]">
+                            Ready to articulate your <span class="italic text-bronzeLight">permanent</span> digital presence?
+                        </h2>
+                        <div class="pt-4 flex flex-wrap items-center gap-5">
+                            <button onclick="openBookingDrawer()" class="px-7 py-4 rounded-full bg-alabaster text-charcoal hover:bg-bronzeLight hover:text-espresso transition-all duration-500 text-xs uppercase tracking-[0.18em] font-medium">
+                                Schedule Private Briefing
+                            </button>
+                            <a href="mailto:atelier@maisonvance.com" class="text-xs uppercase tracking-[0.18em] text-alabaster/80 hover:text-bronzeLight transition-colors border-b border-alabaster/30 pb-1">
+                                atelier@maisonvance.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Live Global Studio Time Ticker -->
+                    <div class="lg:col-span-5 grid grid-cols-3 gap-4 lg:pl-8 items-end">
+                        <div class="p-4 rounded-xl bg-espressoElevated border border-espressoBorder">
+                            <span class="block text-[10px] uppercase tracking-[0.2em] text-bronzeLight mb-1">Zürich</span>
+                            <span id="clock-zurich" class="font-serif text-xl md:text-2xl text-alabaster">--:--</span>
+                            <span class="block text-[10px] text-alabaster/50 mt-1">CET • Atelier</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-espressoElevated border border-espressoBorder">
+                            <span class="block text-[10px] uppercase tracking-[0.2em] text-bronzeLight mb-1">London</span>
+                            <span id="clock-london" class="font-serif text-xl md:text-2xl text-alabaster">--:--</span>
+                            <span class="block text-[10px] text-alabaster/50 mt-1">GMT • Salon</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-espressoElevated border border-espressoBorder">
+                            <span class="block text-[10px] uppercase tracking-[0.2em] text-bronzeLight mb-1">Kyoto</span>
+                            <span id="clock-kyoto" class="font-serif text-xl md:text-2xl text-alabaster">--:--</span>
+                            <span class="block text-[10px] text-alabaster/50 mt-1">JST • Residency</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oversized Display Wordmark -->
+                <div class="py-12 md:py-16 border-b border-espressoBorder overflow-hidden">
+                    <div class="font-serif text-[13vw] lg:text-[11.5rem] leading-none tracking-[0.06em] uppercase text-center text-alabaster/95 select-none">
+                        MAISON VANCE
+                    </div>
+                </div>
+
+                <!-- Bottom Copyright & Back to Top -->
+                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] uppercase tracking-[0.18em] text-alabaster/50">
+                    <div>© 2026 Maison Vance Atelier. All Rights Reserved.</div>
+                    <div class="flex items-center gap-8">
+                        <a href="#selected-works" class="hover:text-alabaster transition-colors">Index</a>
+                        <a href="#philosophy" class="hover:text-alabaster transition-colors">Ethos</a>
+                        <a href="#atelier-estimator" class="hover:text-alabaster transition-colors">Scope</a>
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-bronzeLight hover:text-alabaster transition-colors">
+                            Back to Top ↑
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </main>
+
+    <!-- =====================================================================
+         SLIDE-OVER CASE STUDY DRAWER (INTERACTIVE MONOGRAPH VIEWER)
+         ===================================================================== -->
+    <div id="caseStudyBackdrop" onclick="closeCaseStudy()" class="fixed inset-0 bg-espresso/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-500"></div>
+    <aside id="caseStudyDrawer" aria-hidden="true" class="fixed top-0 right-0 bottom-0 w-full max-w-3xl bg-alabaster text-charcoal z-50 transform translate-x-full transition-transform duration-700 ease-editorial overflow-y-auto border-l border-stoneBorder shadow-2xl">
+        
+        <!-- Sticky Drawer Header -->
+        <div class="sticky top-0 z-20 bg-alabaster/95 backdrop-blur-md border-b border-stoneBorder px-6 md:px-10 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-bronze"></span>
+                <span id="drawerCategory" class="text-[11px] uppercase tracking-[0.2em] text-charcoalMuted">Hospitality Monograph</span>
+            </div>
+            <button onclick="closeCaseStudy()" class="px-4 py-2 rounded-full border border-stoneBorder hover:border-charcoal text-xs uppercase tracking-[0.16em] text-charcoal transition-colors">
+                Close ✕
+            </button>
+        </div>
+
+        <!-- Drawer Content Body -->
+        <div class="p-6 md:p-10 space-y-10">
+            
+            <!-- Title & Subtitle -->
+            <div>
+                <div class="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-bronze mb-3">
+                    <span id="drawerLocation">Tramuntana, Mallorca</span>
+                    <span id="drawerYear">2026</span>
+                </div>
+                <h2 id="drawerTitle" class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-4">Villa Solis</h2>
+                <p id="drawerSummary" class="text-sm md:text-base text-charcoalMuted font-light leading-relaxed">
+                    A quiet digital sanctuary crafted for an exclusive limestone estate overlooking the Balearic Sea.
+                </p>
+            </div>
+
+            <!-- Interactive Gallery Switcher -->
+            <div class="space-y-4">
+                <div class="rounded-2xl overflow-hidden border border-stoneBorder bg-alabasterDark aspect-[16/10]">
+                    <img id="drawerMainImage" src="" alt="Case Study Visual" class="w-full h-full object-cover transition-opacity duration-500">
+                </div>
+                <div class="flex items-center justify-between gap-4">
+                    <span id="drawerImageCaption" class="text-xs italic font-serif text-charcoalMuted">Fig 01. Main Courtyard &amp; Limestone Pavilion</span>
+                    <div id="drawerGalleryThumbs" class="flex items-center gap-2">
+                        <!-- Dynamically populated gallery switcher pills -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Performance Metrics Grid -->
+            <div class="grid grid-cols-3 gap-4 py-6 border-y border-stoneBorder">
+                <div>
+                    <span id="drawerMetric1Val" class="font-serif text-3xl md:text-4xl text-charcoal block">+185%</span>
+                    <span id="drawerMetric1Lbl" class="text-[10px] uppercase tracking-[0.16em] text-charcoalMuted">Direct Inquiries</span>
+                </div>
+                <div>
+                    <span id="drawerMetric2Val" class="font-serif text-3xl md:text-4xl text-charcoal block">0.4s</span>
+                    <span id="drawerMetric2Lbl" class="text-[10px] uppercase tracking-[0.16em] text-charcoalMuted">First Paint</span>
+                </div>
+                <div>
+                    <span id="drawerMetric3Val" class="font-serif text-3xl md:text-4xl text-charcoal block">99/100</span>
+                    <span id="drawerMetric3Lbl" class="text-[10px] uppercase tracking-[0.16em] text-charcoalMuted">Craft Index</span>
+                </div>
+            </div>
+
+            <!-- Design Philosophy & Deliverables -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-7 space-y-4">
+                    <h4 class="text-xs uppercase tracking-[0.18em] font-medium text-charcoal">Architectural Approach</h4>
+                    <p id="drawerPhilosophy" class="text-sm text-charcoalMuted font-light leading-relaxed">
+                        Drawing inspiration from local Marés sandstone and sun-bleached linen, we eliminated conventional hospitality widgets in favor of an unhurried editorial scroll.
+                    </p>
+                </div>
+                <div class="md:col-span-5 space-y-4">
+                    <h4 class="text-xs uppercase tracking-[0.18em] font-medium text-charcoal">Deliverables</h4>
+                    <ul id="drawerDeliverables" class="space-y-2 text-xs text-charcoalMuted border-l border-bronze pl-4">
+                        <li>• Digital Brand Flagship</li>
+                        <li>• Bespoke Reservation Flow</li>
+                        <li>• Editorial Art Direction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Drawer Action -->
+            <div class="pt-6 border-t border-stoneBorder flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-xs text-charcoalMuted">Commission a similar flagship for your practice</span>
+                <button onclick="closeCaseStudy(); openBookingDrawer();" class="w-full sm:w-auto px-6 py-3.5 rounded-full bg-charcoal text-alabaster hover:bg-bronze transition-colors text-xs uppercase tracking-[0.18em] font-medium">
+                    Inquire About Availability
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =====================================================================
+         PRIVATE CONSULTATION & SCHEDULER DRAWER
+         ===================================================================== -->
+    <div id="bookingBackdrop" onclick="closeBookingDrawer()" class="fixed inset-0 bg-espresso/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-500"></div>
+    <aside id="bookingDrawer" aria-hidden="true" class="fixed top-0 right-0 bottom-0 w-full max-w-xl bg-alabaster text-charcoal z-50 transform translate-x-full transition-transform duration-700 ease-editorial overflow-y-auto border-l border-stoneBorder shadow-2xl">
+        
+        <div class="sticky top-0 z-20 bg-alabaster/95 backdrop-blur-md border-b border-stoneBorder px-6 md:px-10 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-bronze"></span>
+                <span class="text-[11px] uppercase tracking-[0.2em] text-charcoal font-medium">Private Atelier Briefing</span>
+            </div>
+            <button onclick="closeBookingDrawer()" class="px-4 py-2 rounded-full border border-stoneBorder hover:border-charcoal text-xs uppercase tracking-[0.16em] text-charcoal transition-colors">
+                Close ✕
+            </button>
+        </div>
+
+        <div class="p-6 md:p-10">
+            <!-- Form State -->
+            <div id="bookingFormContainer" class="space-y-8">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-4xl font-light text-charcoal mb-2">Request a Private Consultation</h2>
+                    <p class="text-xs md:text-sm text-charcoalMuted font-light leading-relaxed">
+                        Meet directly with our Founding Creative Director for a 30-minute architectural review of your digital flagship goals.
+                    </p>
+                </div>
+
+                <form id="consultationForm" onsubmit="handleBookingSubmit(event)" class="space-y-6">
+                    
+                    <!-- Step 1: Select Date & Time Slot -->
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-[0.18em] text-charcoal font-medium mb-3">01. Preferred Briefing Window</label>
+                        <div class="grid grid-cols-3 gap-2.5 mb-3">
+                            <button type="button" onclick="selectSlotDate(this, 'Thu, Nov 26')" class="slot-date-btn active py-2.5 px-3 rounded-xl border border-charcoal bg-charcoal text-alabaster text-xs transition-all">
+                                Thu, Nov 26
+                            </button>
+                            <button type="button" onclick="selectSlotDate(this, 'Fri, Nov 27')" class="slot-date-btn py-2.5 px-3 rounded-xl border border-stoneBorder bg-alabaster text-charcoal hover:border-charcoal text-xs transition-all">
+                                Fri, Nov 27
+                            </button>
+                            <button type="button" onclick="selectSlotDate(this, 'Mon, Nov 30')" class="slot-date-btn py-2.5 px-3 rounded-xl border border-stoneBorder bg-alabaster text-charcoal hover:border-charcoal text-xs transition-all">
+                                Mon, Nov 30
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button type="button" onclick="selectSlotTime(this, '10:00 CET / 09:00 GMT')" class="slot-time-btn active py-2.5 px-3 rounded-xl border border-charcoal bg-alabasterDark text-charcoal text-xs font-medium transition-all">
+                                10:00 CET • Morning
+                            </button>
+                            <button type="button" onclick="selectSlotTime(this, '16:30 CET / 15:30 GMT')" class="slot-time-btn py-2.5 px-3 rounded-xl border border-stoneBorder bg-alabaster text-charcoalMuted hover:border-charcoal text-xs transition-all">
+                                16:30 CET • Afternoon
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Client Details -->
+                    <div class="space-y-4 pt-2">
+                        <label class="block text-[11px] uppercase tracking-[0.18em] text-charcoal font-medium">02. Principal &amp; Organization</label>
+                        
+                        <div>
+                            <input type="text" id="clientName" required placeholder="Your Full Name *" class="w-full px-4 py-3.5 rounded-xl bg-alabaster border border-stoneBorder focus:border-charcoal focus:outline-none text-sm text-charcoal placeholder:text-charcoalMuted/60 transition-colors">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="email" id="clientEmail" required placeholder="Private Email Address *" class="w-full px-4 py-3.5 rounded-xl bg-alabaster border border-stoneBorder focus:border-charcoal focus:outline-none text-sm text-charcoal placeholder:text-charcoalMuted/60 transition-colors">
+                            <input type="text" id="clientBrand" placeholder="Studio / Maison Name" class="w-full px-4 py-3.5 rounded-xl bg-alabaster border border-stoneBorder focus:border-charcoal focus:outline-none text-sm text-charcoal placeholder:text-charcoalMuted/60 transition-colors">
+                        </div>
+
+                        <div>
+                            <textarea id="clientNotes" rows="3" placeholder="Brief overview of your architectural or digital flagship vision..." class="w-full px-4 py-3.5 rounded-xl bg-alabaster border border-stoneBorder focus:border-charcoal focus:outline-none text-sm text-charcoal placeholder:text-charcoalMuted/60 transition-colors"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 px-6 rounded-full bg-charcoal text-alabaster hover:bg-bronze transition-colors duration-500 text-xs uppercase tracking-[0.18em] font-medium shadow-sm">
+                        Confirm Private Briefing
+                    </button>
+                </form>
+            </div>
+
+            <!-- Confirmation Receipt State (Hidden until submitted) -->
+            <div id="bookingConfirmation" class="hidden space-y-8 py-6">
+                <div class="p-8 rounded-2xl border border-stoneBorder bg-alabasterDark/70 space-y-6">
+                    <div class="flex items-center justify-between border-b border-stoneBorder pb-4">
+                        <span class="text-[10px] uppercase tracking-[0.22em] text-bronze font-semibold">Dossier Confirmed</span>
+                        <span id="receiptRef" class="text-xs font-mono text-charcoalMuted">#MV-8492</span>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-serif text-3xl text-charcoal mb-2">We look forward to speaking, <span id="receiptName" class="italic">Guest</span>.</h3>
+                        <p class="text-xs text-charcoalMuted font-light leading-relaxed">
+                            A calendar invitation with private video salon credentials has been dispatched to <span id="receiptEmail" class="text-charcoal font-medium"></span>.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-stoneBorder text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-charcoalMuted">Scheduled Window</span>
+                            <span id="receiptDateTime" class="font-medium text-charcoal">Thu, Nov 26 • 10:00 CET</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-charcoalMuted">Hosting Director</span>
+                            <span class="font-medium text-charcoal">Henri Vance (Zürich Atelier)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="resetBookingForm(); closeBookingDrawer();" class="w-full py-3.5 rounded-full border border-charcoal text-xs uppercase tracking-[0.18em] text-charcoal hover:bg-charcoal hover:text-alabaster transition-colors">
+                    Return to Atelier
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =====================================================================
+         JAVASCRIPT ARCHITECTURE: INTERACTIVITY, DATA & MICRO-ANIMATIONS
+         ===================================================================== -->
+    <script>
+        // ---------------------------------------------------------------------
+        // 1. CURATED CASE STUDY MONOGRAPH DATABASE
+        // ---------------------------------------------------------------------
+        const caseStudies = {
+            'villa-solis': {
+                category: 'Hospitality & Private Residency',
+                location: 'Tramuntana, Mallorca',
+                year: '2026',
+                title: 'Villa Solis — Mallorca',
+                summary: 'Complete brand architecture, digital flagship, and private residency booking engine for an ultra-private limestone cliffside sanctuary in Mallorca.',
+                metrics: [
+                    { val: '+185%', lbl: 'Direct Inquiries' },
+                    { val: '0.4s', lbl: 'First Contentful Paint' },
+                    { val: '99/100', lbl: 'Performance Score' }
+                ],
+                philosophy: 'Drawing inspiration from local Marés sandstone and sun-bleached linen, we eliminated conventional hospitality widgets in favor of an unhurried editorial scroll. Prospective guests experience the architecture room by room before requesting a private stay.',
+                deliverables: [
+                    'Brand Strategy & Naming',
+                    'Bespoke Digital Flagship',
+                    'Private Residency Booking Engine',
+                    'Editorial Photography Direction'
+                ],
+                gallery: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 01. Infinity Limestone Pool & Balearic Horizon'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 02. South Courtyard & Travertine Colonnade'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 03. Primary Suite & Hand-Troweled Lime Plaster'
+                    }
+                ]
+            },
+            'atelier-kengo': {
+                category: 'Architecture Practice',
+                location: 'Copenhagen & Zürich',
+                year: '2025',
+                title: 'Søren Lindqvist Architects',
+                summary: 'An interactive digital monograph and spatial archive celebrating twenty years of Nordic timber, raw concrete, and civic cultural pavilions.',
+                metrics: [
+                    { val: '4.2m', lbl: 'Avg. Session Duration' },
+                    { val: '99/100', lbl: 'Lighthouse Score' },
+                    { val: '+210%', lbl: 'International Commissions' }
+                ],
+                philosophy: 'Architects require a portfolio that behaves like a Swiss museum catalog. We designed a tactile, grid-locked index with instantaneous filtering by material typology, allowing curators and private developers to inspect blueprints alongside finished photography.',
+                deliverables: [
+                    'Digital Monograph System',
+                    'Interactive Typology Index',
+                    'Custom Editorial Typography',
+                    'Multi-language CMS'
+                ],
+                gallery: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 01. Aarhus Coastal Pavilion — Timber & Cast Concrete'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 02. Daylight Atrium Study — Natural Oak Joinery'
+                    }
+                ]
+            },
+            'maison-verre': {
+                category: 'Private Brand & Collectible Design',
+                location: 'Geneva, Switzerland',
+                year: '2025',
+                title: 'Objekt Vale — Geneva',
+                summary: 'A private collector salon and limited-edition furniture flagship showcasing monolithic carved stone and cast bronze pieces.',
+                metrics: [
+                    { val: '3.4x', lbl: 'Avg. Commission Value' },
+                    { val: '100%', lbl: 'Edition Sell-Through' },
+                    { val: '0.3s', lbl: 'Page Transition' }
+                ],
+                philosophy: 'Collectible design demands intimacy. Rather than an e-commerce cart, we created a private acquisition dossier flow where collectors can inspect provenance certificates, stone quarry origins, and request bespoke dimensions.',
+                deliverables: [
+                    'Brand Identity & Monogram',
+                    'Private Collector Portal',
+                    'Provenance Dossier Generator',
+                    'Art Direction'
+                ],
+                gallery: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 01. Monolith Plinth No. 04 in Honed Travertine'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 02. Geneva Salon Exhibition Space'
+                    }
+                ]
+            },
+            'kurokawa-onsen': {
+                category: 'Hospitality & Wellness',
+                location: 'Kyoto Prefecture, Japan',
+                year: '2024',
+                title: 'Kurokawa Forest Sanctuary',
+                summary: 'A serene, bilingual digital flagship for a twelve-pavilion cedar and hot-spring retreat nestled in the cedar forests north of Kyoto.',
+                metrics: [
+                    { val: '94%', lbl: 'Seasonal Occupancy' },
+                    { val: '+140%', lbl: 'Direct Suite Bookings' },
+                    { val: '62%', lbl: 'Reduced OTA Dependency' }
+                ],
+                philosophy: 'Guided by the Japanese aesthetic of Ma (negative space), the interface unfolds at a meditative pace. Seasonal photography automatically shifts between spring mist, summer moss, autumn maple, and winter snow.',
+                deliverables: [
+                    'Bilingual EN/JP Flagship',
+                    'Seasonal Atmosphere Engine',
+                    'Private Onsen Suite Concierge',
+                    'Editorial Storytelling'
+                ],
+                gallery: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 01. Cedar Pavilion & Private Moss Garden'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1600&q=85',
+                        caption: 'Fig 02. Thermal Stone Bath overlooking the Ravine'
+                    }
+                ]
+            }
+        };
+
+        // ---------------------------------------------------------------------
+        // 2. NAVBAR SCROLL & MOBILE MENU LOGIC
+        // ---------------------------------------------------------------------
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.classList.add('bg-alabaster/90', 'backdrop-blur-md', 'border-stoneBorder');
+                navbar.classList.remove('border-transparent');
+            } else {
+                navbar.classList.remove('bg-alabaster/90', 'backdrop-blur-md', 'border-stoneBorder');
+                navbar.classList.add('border-transparent');
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // ---------------------------------------------------------------------
+        // 3. INTERACTIVE CASE STUDY FILTERING
+        // ---------------------------------------------------------------------
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active pill styling
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-charcoal', 'text-alabaster', 'border-charcoal');
+                    b.classList.add('bg-transparent', 'text-charcoalMuted', 'border-stoneBorder');
+                });
+                btn.classList.remove('bg-transparent', 'text-charcoalMuted', 'border-stoneBorder');
+                btn.classList.add('bg-charcoal', 'text-alabaster', 'border-charcoal');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 30);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(12px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // ---------------------------------------------------------------------
+        // 4. CASE STUDY DRAWER CONTROLLER
+        // ---------------------------------------------------------------------
+        function openCaseStudy(id) {
+            const data = caseStudies[id];
+            if (!data) return;
+
+            document.getElementById('drawerCategory').textContent = data.category;
+            document.getElementById('drawerLocation').textContent = data.location;
+            document.getElementById('drawerYear').textContent = data.year;
+            document.getElementById('drawerTitle').textContent = data.title;
+            document.getElementById('drawerSummary').textContent = data.summary;
+            document.getElementById('drawerPhilosophy').textContent = data.philosophy;
+
+            // Populate Metrics
+            document.getElementById('drawerMetric1Val').textContent = data.metrics[0].val;
+            document.getElementById('drawerMetric1Lbl').textContent = data.metrics[0].lbl;
+            document.getElementById('drawerMetric2Val').textContent = data.metrics[1].val;
+            document.getElementById('drawerMetric2Lbl').textContent = data.metrics[1].lbl;
+            document.getElementById('drawerMetric3Val').textContent = data.metrics[2].val;
+            document.getElementById('drawerMetric3Lbl').textContent = data.metrics[2].lbl;
+
+            // Populate Deliverables
+            const delivList = document.getElementById('drawerDeliverables');
+            delivList.innerHTML = data.deliverables.map(item => `<li>• ${item}</li>`).join('');
+
+            // Setup Gallery Switcher
+            const mainImg = document.getElementById('drawerMainImage');
+            const caption = document.getElementById('drawerImageCaption');
+            const thumbsContainer = document.getElementById('drawerGalleryThumbs');
+
+            mainImg.src = data.gallery[0].url;
+            caption.textContent = data.gallery[0].caption;
+
+            thumbsContainer.innerHTML = data.gallery.map((img, idx) => `
+                <button type="button" onclick="switchDrawerImage('${id}', ${idx})" class="gallery-thumb-btn px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.15em] border transition-colors ${idx === 0 ? 'bg-charcoal text-alabaster border-charcoal' : 'border-stoneBorder text-charcoalMuted hover:border-charcoal'}">
+                    0${idx + 1}
+                </button>
+            `).join('');
+
+            // Animate Drawer In
+            const backdrop = document.getElementById('caseStudyBackdrop');
+            const drawer = document.getElementById('caseStudyDrawer');
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                drawer.classList.remove('translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function switchDrawerImage(studyId, index) {
+            const study = caseStudies[studyId];
+            if (!study || !study.gallery[index]) return;
+
+            const mainImg = document.getElementById('drawerMainImage');
+            const caption = document.getElementById('drawerImageCaption');
+            mainImg.style.opacity = '0.35';
+
+            setTimeout(() => {
+                mainImg.src = study.gallery[index].url;
+                caption.textContent = study.gallery[index].caption;
+                mainImg.style.opacity = '1';
+            }, 200);
+
+            const btns = document.querySelectorAll('.gallery-thumb-btn');
+            btns.forEach((b, i) => {
+                if (i === index) {
+                    b.classList.add('bg-charcoal', 'text-alabaster', 'border-charcoal');
+                    b.classList.remove('border-stoneBorder', 'text-charcoalMuted');
+                } else {
+                    b.classList.remove('bg-charcoal', 'text-alabaster', 'border-charcoal');
+                    b.classList.add('border-stoneBorder', 'text-charcoalMuted');
+                }
+            });
+        }
+
+        function closeCaseStudy() {
+            const backdrop = document.getElementById('caseStudyBackdrop');
+            const drawer = document.getElementById('caseStudyDrawer');
+            backdrop.classList.add('opacity-0');
+            drawer.classList.add('translate-x-full');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 500);
+            document.body.style.overflow = '';
+        }
+
+        // ---------------------------------------------------------------------
+        // 5. INTERACTIVE SCOPE & INVESTMENT CONFIGURATOR LOGIC
+        // ---------------------------------------------------------------------
+        let currentMultiplier = 1;
+        let currentCadenceLabel = 'Standard Atelier Cadence';
+
+        function togglePillar(btn) {
+            const activePillars = document.querySelectorAll('.pillar-card.active');
+            // Prevent deselecting the last remaining pillar so estimate is always valid
+            if (btn.classList.contains('active') && activePillars.length === 1) {
+                return;
+            }
+
+            btn.classList.toggle('active');
+            const check = btn.querySelector('.pillar-check');
+
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('border-stoneBorder', 'bg-alabaster');
+                btn.classList.add('border-charcoal', 'bg-alabasterDark/70');
+                check.classList.remove('border', 'border-stoneBorder', 'text-transparent');
+                check.classList.add('bg-charcoal', 'text-alabaster');
+            } else {
+                btn.classList.add('border-stoneBorder', 'bg-alabaster');
+                btn.classList.remove('border-charcoal', 'bg-alabasterDark/70');
+                check.classList.add('border', 'border-stoneBorder', 'text-transparent');
+                check.classList.remove('bg-charcoal', 'text-alabaster');
+            }
+
+            recalculateEstimate();
+        }
+
+        function selectCadence(btn) {
+            document.querySelectorAll('.cadence-btn').forEach(b => {
+                b.classList.remove('active', 'border-charcoal', 'bg-charcoal', 'text-alabaster');
+                b.classList.add('border-stoneBorder', 'bg-alabaster', 'text-charcoal');
+            });
+
+            btn.classList.add('active', 'border-charcoal', 'bg-charcoal', 'text-alabaster');
+            btn.classList.remove('border-stoneBorder', 'bg-alabaster', 'text-charcoal');
+
+            currentMultiplier = parseFloat(btn.getAttribute('data-multiplier'));
+            currentCadenceLabel = btn.getAttribute('data-label');
+            recalculateEstimate();
+        }
+
+        function recalculateEstimate() {
+            const activePillars = document.querySelectorAll('.pillar-card.active');
+            let baseTotal = 0;
+            let totalWeeks = 0;
+            const deliverablesHTML = [];
+
+            activePillars.forEach(p => {
+                baseTotal += parseInt(p.getAttribute('data-price'), 10);
+                totalWeeks += parseInt(p.getAttribute('data-weeks'), 10);
+                const title = p.querySelector('h4').textContent;
+                deliverablesHTML.push(`
+                    <li class="flex items-center justify-between">
+                        <span>• ${title}</span>
+                        <span class="text-charcoalMuted">Included</span>
+                    </li>
+                `);
+            });
+
+            // Adjust weeks slightly if accelerated
+            if (currentMultiplier > 1) {
+                totalWeeks = Math.max(3, Math.ceil(totalWeeks * 0.75));
+            }
+
+            const finalEstimate = Math.round((baseTotal * currentMultiplier) / 100) * 100;
+            document.getElementById('estimatedTotal').textContent = '$' + finalEstimate.toLocaleString('en-US');
+            document.getElementById('estimatedTimeline').textContent = `Estimated Delivery: ${totalWeeks} Weeks • ${currentCadenceLabel}`;
+            document.getElementById('selectedDeliverablesList').innerHTML = deliverablesHTML.join('');
+        }
+
+        function transferScopeToBooking() {
+            const total = document.getElementById('estimatedTotal').textContent;
+            const timeline = document.getElementById('estimatedTimeline').textContent;
+            const activeTitles = Array.from(document.querySelectorAll('.pillar-card.active h4')).map(el => el.textContent).join(', ');
+            
+            openBookingDrawer();
+            const notesField = document.getElementById('clientNotes');
+            notesField.value = `Configured Scope: ${activeTitles}\nDossier Estimate: ${total} (${timeline})`;
+        }
+
+        // ---------------------------------------------------------------------
+        // 6. PRIVATE CONSULTATION SCHEDULER DRAWER
+        // ---------------------------------------------------------------------
+        let selectedDate = 'Thu, Nov 26';
+        let selectedTime = '10:00 CET';
+
+        function openBookingDrawer() {
+            const backdrop = document.getElementById('bookingBackdrop');
+            const drawer = document.getElementById('bookingDrawer');
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                drawer.classList.remove('translate-x-full');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingDrawer() {
+            const backdrop = document.getElementById('bookingBackdrop');
+            const drawer = document.getElementById('bookingDrawer');
+            backdrop.classList.add('opacity-0');
+            drawer.classList.add('translate-x-full');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 500);
+            document.body.style.overflow = '';
+        }
+
+        function selectSlotDate(btn, dateStr) {
+            document.querySelectorAll('.slot-date-btn').forEach(b => {
+                b.classList.remove('active', 'border-charcoal', 'bg-charcoal', 'text-alabaster');
+                b.classList.add('border-stoneBorder', 'bg-alabaster', 'text-charcoal');
+            });
+            btn.classList.add('active', 'border-charcoal', 'bg-charcoal', 'text-alabaster');
+            btn.classList.remove('border-stoneBorder', 'bg-alabaster', 'text-charcoal');
+            selectedDate = dateStr;
+        }
+
+        function selectSlotTime(btn, timeStr) {
+            document.querySelectorAll('.slot-time-btn').forEach(b => {
+                b.classList.remove('active', 'border-charcoal', 'bg-alabasterDark', 'text-charcoal', 'font-medium');
+                b.classList.add('border-stoneBorder', 'bg-alabaster', 'text-charcoalMuted');
+            });
+            btn.classList.add('active', 'border-charcoal', 'bg-alabasterDark', 'text-charcoal', 'font-medium');
+            btn.classList.remove('border-stoneBorder', 'bg-alabaster', 'text-charcoalMuted');
+            selectedTime = timeStr;
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const firstName = name.split(' ')[0] || 'Guest';
+
+            document.getElementById('receiptName').textContent = firstName;
+            document.getElementById('receiptEmail').textContent = email;
+            document.getElementById('receiptDateTime').textContent = `${selectedDate} • ${selectedTime}`;
+            document.getElementById('receiptRef').textContent = '#MV-' + Math.floor(1000 + Math.random() * 9000);
+
+            document.getElementById('bookingFormContainer').classList.add('hidden');
+            document.getElementById('bookingConfirmation').classList.remove('hidden');
+        }
+
+        function resetBookingForm() {
+            document.getElementById('consultationForm').reset();
+            document.getElementById('bookingConfirmation').classList.add('hidden');
+            document.getElementById('bookingFormContainer').classList.remove('hidden');
+        }
+
+        // ---------------------------------------------------------------------
+        // 7. LIVE GLOBAL STUDIO CLOCKS & SCROLL REVEAL OBSERVER
+        // ---------------------------------------------------------------------
+        function updateStudioClocks() {
+            const now = new Date();
+            const fmt = (tz) => new Intl.DateTimeFormat('en-GB', {
+                timeZone: tz,
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            }).format(now);
+
+            document.getElementById('clock-zurich').textContent = fmt('Europe/Zurich');
+            document.getElementById('clock-london').textContent = fmt('Europe/London');
+            document.getElementById('clock-kyoto').textContent = fmt('Asia/Tokyo');
+        }
+        updateStudioClocks();
+        setInterval(updateStudioClocks, 15000);
+
+        // Intersection Observer for Subtle Editorial Scroll Reveals
+        const observerOptions = {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+
+        // Keyboard Escape key support for drawers
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCaseStudy();
+                closeBookingDrawer();
+            }
+        });
+    </script>
+</body>
+</html>

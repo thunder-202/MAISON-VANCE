@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --color-alabaster: #F6F4F0;
+  --color-alabasterDark: #EDEAE3;
+  --color-charcoal: #181816;
+  --color-charcoalMuted: #575550;
+  --color-bronze: #9E825E;
+  --color-bronzeLight: #B89F7D;
+  --color-stoneBorder: #E2DDD5;
+  --color-espresso: #141312;
+  --color-espressoElevated: #1E1D1B;
+  --color-espressoBorder: #2C2A27;
+
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Bespoke Editorial Refinement & Micro-interactions */
+body {
+  background-color: #F6F4F0;
+  color: #181816;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle Grain Texture Overlay for Tactile Paper Feel */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Editorial Image Hover & Reveal */
+.editorial-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.editorial-img-wrap img {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
+}
+.group:hover .editorial-img-wrap img,
+.editorial-img-wrap:hover img {
+  transform: scale(1.045);
+}
+
+/* Subtle Underline Link Animation */
+.editorial-link {
+  position: relative;
+  display: inline-block;
+}
+.editorial-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.editorial-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Scroll Reveal Animation */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar for Drawers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F4F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9C3B8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9E825E;
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: #9E825E;
+  color: #F6F4F0;
+}
